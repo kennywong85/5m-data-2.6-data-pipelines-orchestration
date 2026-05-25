@@ -1,0 +1,39 @@
+project_id: 019e5cbb-a226-7b6f-aaef-b3c1c5d1af0f
+default_environment: dev
+
+environments:
+  - name: dev
+  - name: staging
+  - name: prod
+
+python: python3.11
+
+plugins:
+  extractors:
+    - name: tap-github
+      variant: meltanolabs
+      pip_url: git+https://github.com/MeltanoLabs/tap-github.git
+      config:
+        repositories:
+          - pandas-dev/pandas
+      select:
+        - releases.tag_name
+        - releases.body
+        - releases.published_at
+
+  loaders:
+    - name: target-jsonl
+      variant: andyh1203
+      pip_url: target-jsonl
+
+    - name: target-bigquery
+      variant: z3z1ma
+      pip_url: "git+https://github.com/z3z1ma/target-bigquery.git setuptools<80"
+      config:
+        credentials_path: /home/kennywong/bigquery-admin-key.json
+        dataset: ingestion
+        denormalized: true
+        flattening_enabled: true
+        flattening_max_depth: 1
+        method: batch_job
+        project: mydsaiproject0001
