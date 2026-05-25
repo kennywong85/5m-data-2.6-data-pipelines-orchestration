@@ -19,3 +19,15 @@ plugins:
       user: postgres.oztxcxhjctreoxtjdnhb
     select:
     - public-resale_flat_prices_from_jan_2017.*
+  loaders:
+  - name: target-bigquery
+    variant: z3z1ma
+    pip_url: "git+https://github.com/z3z1ma/target-bigquery.git setuptools<80"
+    config:
+      credentials_path: /home/kennywong/bigquery-admin-key.json
+      dataset: resale
+      denormalized: true
+      flattening_enabled: true
+      flattening_max_depth: 1
+      method: batch_job
+      project: mydsaiproject0001

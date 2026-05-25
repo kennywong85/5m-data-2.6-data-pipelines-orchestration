@@ -1,0 +1,14 @@
+resale_flat:
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: mydsaiproject0001
+      dataset: resale
+      keyfile: /home/kennywong/bigquery-admin-key.json
+      location: US
+      priority: interactive
+      threads: 1
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+  target: dev
