@@ -1,0 +1,21 @@
+default_environment: dev
+project_id: 019e5d1c-08ca-739a-ab9b-30a019db695e
+environments:
+- name: dev
+- name: staging
+- name: prod
+python: python3.11
+plugins:
+  extractors:
+  - name: tap-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-tap-postgres
+    config:
+      database: postgres
+      filter_schemas:
+      - public
+      host: aws-1-ap-northeast-2.pooler.supabase.com
+      port: 5432
+      user: postgres.oztxcxhjctreoxtjdnhb
+    select:
+    - public-resale_flat_prices_from_jan_2017.*
